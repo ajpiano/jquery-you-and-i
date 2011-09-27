@@ -25,6 +25,10 @@
   <link rel="stylesheet" id="style-theme-link" href="deck.js/themes/style/neon.css">
   <link rel="stylesheet" id="transition-theme-link" href="deck.js/themes/transition/horizontal-slide.css">
 
+  <!-- Styles fro codemirror syntax highlighting -->>
+  <link rel="stylesheet" href="deck.js-codemirror/deck.codemirror.css">
+  <link rel="stylesheet" href="deck.js-codemirror/themes/default.css">
+
   <!-- Custom CSS just for this page -->
   <link rel="stylesheet" href="master.css">
 
@@ -32,7 +36,6 @@
 </head>
 
 <body class="deck-container">
-
 
 <section class="slide" id="cover">
   <h1>jQuery, You & I: <span>Lookin' Good Together</span></h2>
@@ -47,19 +50,31 @@
   <p>I am a slide</p>
 </section>
 
+<section class="slide" id="test-code">
+  <h2>Syntax Highlighting</h2>
+  <h3>This is just regular code</h3>
+
+  <div id="code" name="code" class="code" mode="javascript" style="display: none;">// codemirror demo party!
+    var greeter = function(name) {
+      return "Why hello there " + name;
+    }
+    console.log(greeter("Joe"));
+  </div>
+</section>
+
 <a href="#" class="deck-prev-link" title="Previous">&#8592;</a>
 <a href="#" class="deck-next-link" title="Next">&#8594;</a>
 
 <p class="deck-status">
-        <span class="deck-status-current"></span>
-        /
-        <span class="deck-status-total"></span>
+  <span class="deck-status-current"></span>
+  /
+  <span class="deck-status-total"></span>
 </p>
 
 <form action="." method="get" class="goto-form">
-        <label for="goto-slide">Go to slide:</label>
-        <input type="number" name="slidenum" id="goto-slide">
-        <input type="submit" value="Go">
+  <label for="goto-slide">Go to slide:</label>
+  <input type="number" name="slidenum" id="goto-slide">
+  <input type="submit" value="Go">
 </form>
 
 <a href="." title="Permalink to this slide" class="deck-permalink">#</a>
@@ -76,6 +91,17 @@
 <script src="deck.js/extensions/status/deck.status.js"></script>
 <script src="deck.js/extensions/navigation/deck.navigation.js"></script>
 <script src="deck.js/extensions/hash/deck.hash.js"></script>
+
+<!-- Base codemiror code -->
+<script src="deck.js-codemirror/codemirror.js"></script>
+
+<!-- Syntax highlighting Modes -->
+
+<!-- javascript -->
+<script src="deck.js-codemirror/mode/javascript/javascript.js"></script>
+
+<!-- Plugin code -->
+<script src="deck.js-codemirror/deck.codemirror.js"></script>
 
 <!-- Specific to this page -->
 <script src="main.js"></script>
