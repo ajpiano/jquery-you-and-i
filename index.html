@@ -100,17 +100,103 @@
 
 
 <section class="slide">
-	<h2>So, why is style important?</h2>
-
-	<h3>Swim in larger talent pools.</h3>
-	<h3>Your future self will thank you</h3>
-	<h3>Less wasted braincycles</h3>
+	<h1>Why?</h1>
 </section>
 
 <section class="slide">
-  <h2>Over Time...</h2>
+
+	<h2>Encourages Contribution</h2>
+	<h3>Open Source, Distributed Development, Remote Teams, etc.</h3>
+</section>
+
+<section class="slide">
+
+	<h2>Less Spent Braincycles</h2>
+	<h3>Your brain is a parser - optimize code for your brain!</h3>
+
+</section>
+
+<section class="slide">
+
+	<h2>Future you says thanks</h2>
+	<img src="img/future-self.jpg" height="500" />
+</section>
+
+<section class="slide">
+	<h1>Code written by 10 people following a style guide will look like 1 person wrote it.</h1>
+
+</section>
+
+
+
+
+<section class="slide">
+  <h2>As your code grows, so does your mess</h2>
 	<h3>Remember those boxes? They fell and spilled everywhere.</h3>
-  <img src="img/should-look.jpg" height="500" />
+  <img src="img/oh-noes.jpg" height="500" />
+</section>
+
+
+<section class="slide">
+
+	<h2>Imagine that as code...</h2>
+<textarea class="code" mode="javascript" style="display: none;">
+...: function(obj){
+  if(!obj||jQuery.type(obj)!=='object' || obj.nodeType||jQuery.isWindow(obj)) return false;
+  try{
+    if(obj.constructor && !hasOwn.call(obj, 'constructor') && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf"))
+      return false;
+}catch(e){return false;}
+  for(var key in obj){}
+  return key===undefined||hasOwn.call(obj, key);
+}
+</textarea>
+
+<h3>WTF? So, if obj is not falsy or not typeof object or has a nodeType property or is a window... return false? </h3>
+<h3>Now it wants to check for constructor and prototype.constructor and it might throw, hence the try/catch</h3>
+<h3>Um... empty for-in?</h3>
+<h3>If key is undefined? But key was never set to anything...?</h3>
+<h3>How about that awesome horizontal scroll bar?</h3>
+
+</section>
+
+<section class="slide">
+
+	<h2>jQuery.isPlainObject()</h2>
+<textarea class="code" mode="javascript" style="display: none;">
+isPlainObject: function( obj ) {
+  // Must be an Object.
+  // Make sure that DOM nodes and window objects don't pass through, as well
+  if ( !obj || jQuery.type(obj) !== "object" || obj.nodeType || jQuery.isWindow( obj ) ) {
+    return false;
+  }
+
+  // Because of IE, we also have to check the presence of the constructor property.
+  try {
+
+    // Not own constructor property must be Object
+    if ( obj.constructor &&
+      !hasOwn.call(obj, "constructor") &&
+      !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") ) {
+      return false;
+    }
+  } catch ( e ) {
+    // IE8,9 Will throw exceptions on certain host objects #9897
+    return false;
+  }
+
+  // Own properties are enumerated firstly, so to speed up,
+  // if last one is own, then all properties are own.
+
+  var key;
+  for ( key in obj ) {}
+
+  return key === undefined || hasOwn.call( obj, key );
+}
+</textarea>
+
+<h3>WIN!</h3>
+
 </section>
 
 
