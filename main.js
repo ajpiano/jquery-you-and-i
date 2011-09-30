@@ -1,6 +1,6 @@
-$( function() {
+$(function() {
 	// Deck initialization
-	$.deck( '.slide' );
+	$.deck( ".slide" );
 
 });
 
