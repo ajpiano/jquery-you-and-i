@@ -123,7 +123,7 @@
 </section>
 
 <section class="slide">
-	<h1>Code written by 10 people following a style guide will look like 1 person wrote it.</h1>
+	<h1>Code written by 10 people following a style guide should look like 1 person wrote it.</h1>
 
 </section>
 
@@ -131,10 +131,20 @@
 
 
 <section class="slide">
-  <h2>As your code grows, so does your mess</h2>
+  <h2>Without a style guide, over time it might look like this...</h2>
 	<h3>Remember those boxes? They fell and spilled everywhere.</h3>
   <img src="img/oh-noes.jpg" height="500" />
 </section>
+
+
+
+<section class="slide">
+
+<h1>Follow Along! http://gul.ly/l9</h1>
+<!-- <h3>That's a lowercase L</h3> -->
+
+</section>
+
 
 
 <section class="slide">
@@ -142,13 +152,12 @@
 	<h2>Imagine that as code...</h2>
 <textarea class="code" mode="javascript" style="display: none;">
 ...: function(obj){
-  if(!obj||jQuery.type(obj)!=='object' || obj.nodeType||jQuery.isWindow(obj)) return false;
-  try{
-    if(obj.constructor && !hasOwn.call(obj, 'constructor') && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf"))
+if(!obj||jQuery.type(obj)!='object' || obj.nodeType||jQuery.isWindow(obj)) return false;
+try{ if(obj.constructor && !hasOwn.call(obj, 'constructor') && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf"))
       return false;
 }catch(e){return false;}
   for(var key in obj){}
-  return key===undefined||hasOwn.call(obj, key);
+  return typeof(key)=="undefined"||hasOwn.call(obj, key);
 }
 </textarea>
 
@@ -160,9 +169,150 @@
 
 </section>
 
+
 <section class="slide">
 
-	<h2>jQuery.isPlainObject()</h2>
+<h2>Linting and Hinting</h2>
+<h3>Enforce Best Practices</h3>
+<h3>Code quality</h3>
+
+</section>
+
+
+<section class="slide">
+<h2>Spacing</h2>
+<h3>Runtogethercodeishardtoread</h3>
+
+<textarea class="code" mode="javascript" style="display: none;">
+...: function( obj ) {
+  if ( !obj || jQuery.type(obj) != 'object' || obj.nodeType || jQuery.isWindow(obj) ) return false;
+  try {
+    if ( obj.constructor && !hasOwn.call(obj, 'constructor' ) && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") ) return false;
+} catch(e) { return false; }
+  var key;
+  for ( key in obj ) {}
+  return typeof key == "undefined" || hasOwn.call(obj, key);
+}
+</textarea>
+</section>
+
+
+<section class="slide">
+
+<h2>Comments</h2>
+<h3>_why_ this code does what it does</h3>
+<h3>What can we exect to happen if this code was removed.</h3>
+TODO: (link to www.1729.com/blog/ExtremeNegativeCodeDocumentation.html )
+
+<textarea class="code" mode="javascript" style="display: none;">
+...: function( obj ) {
+  // Must be an Object.
+  // Make sure that DOM nodes and window objects don't pass through, as well
+  if ( !obj || jQuery.type(obj) != 'object' || obj.nodeType || jQuery.isWindow(obj) )return false;
+  // Because of IE, we also have to check the presence of the constructor property.
+  try {
+    // Not own constructor property must be Object
+    if ( obj.constructor && !hasOwn.call(obj, 'constructor' ) && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") )return false;
+} catch(e) {
+  // IE8,9 Will throw exceptions on certain host objects #9897
+  return false;
+  }
+  // Own properties are enumerated firstly, so to speed up,
+  // if last one is own, then all properties are own.
+  var key;
+  for ( key in obj ) {}
+  return typeof key == "undefined" || hasOwn.call(obj, key);
+}
+</textarea>
+
+</section>
+
+
+<section class="slide">
+
+<h2>Equality, Assignment</h2>
+<h3>Strict === whenever possible</h3>
+<h3>By value for null AND undefined, strict for undefined</h3>
+<textarea class="code" mode="javascript" style="display: none;">
+...: function( obj ) {
+  // Must be an Object.
+  // Make sure that DOM nodes and window objects don't pass through, as well
+  if ( !obj || jQuery.type(obj) !== 'object' || obj.nodeType || jQuery.isWindow(obj) )return false;
+  // Because of IE, we also have to check the presence of the constructor property.
+  try {
+    // Not own constructor property must be Object
+    if ( obj.constructor && !hasOwn.call(obj, 'constructor' ) && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") )return false;
+} catch(e) {
+  // IE8,9 Will throw exceptions on certain host objects #9897
+  return false;
+  }
+  // Own properties are enumerated firstly, so to speed up,
+  // if last one is own, then all properties are own.
+  var key;
+  for ( key in obj ) {}
+  return key === undefined || hasOwn.call(obj, key);
+}
+</textarea>
+</section>
+
+
+<section class="slide">
+
+<h2>Blocks</h2>
+<h3>Omitting braces is weird, confusing and criminal</h3>
+<h3>Braces detected by Lint, but let's make them readable</h3>
+<textarea class="code" mode="javascript" style="display: none;">
+...: function( obj ) {
+  // Must be an Object.
+  // Make sure that DOM nodes and window objects don't pass through, as well
+  if ( !obj || jQuery.type(obj) !== 'object' || obj.nodeType || jQuery.isWindow(obj) ) {
+    return false;
+  }
+
+  // Because of IE, we also have to check the presence of the constructor property.
+  try {
+    // Not own constructor property must be Object
+    if ( obj.constructor &&
+      !hasOwn.call(obj, 'constructor' ) &&
+      !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") ) {
+      return false;
+    }
+  } catch(e) {
+  // IE8,9 Will throw exceptions on certain host objects #9897
+  return false;
+  }
+  // Own properties are enumerated firstly, so to speed up,
+  // if last one is own, then all properties are own.
+  var key;
+  for ( key in obj ) {}
+  return key === undefined || hasOwn.call(obj, key);
+}
+</textarea>
+
+</section>
+
+
+<section class="slide">
+<h1>Quotes: Pick One</h1>
+</section>
+
+<section class="slide">
+<h1>Single? Double?</h1>
+</section>
+
+<section class="slide">
+<h1>IT DOESN'T MATTER... Pick one and stick with it.</h1>
+</section>
+
+
+<section class="slide">
+<h1>Recap.</h1>
+</section>
+
+
+<section class="slide">
+
+<h2>jQuery.isPlainObject()</h2>
 <textarea class="code" mode="javascript" style="display: none;">
 isPlainObject: function( obj ) {
   // Must be an Object.
@@ -202,82 +352,21 @@ isPlainObject: function( obj ) {
 
 <section class="slide">
 
-2. jQuery Core Style
-	(Link to http://docs.jquery.com/JQuery_Core_Style_Guidelines )
+<h2>Questions, Comments, Rants & Raves</h2>
 
 </section>
 
 <section class="slide">
 
-3. JSLint/JSHint
-- Ensures commonly accepted best practices are upheld
-- Code quality
+<h2>I am @rwaldron on the twitz</h2>
 
-</section>
+<h3>Idiomatic.js http://gul.ly/d3r</h3>
 
-<section class="slide">
+<h3>jQuery Core Style Guide http://gul.ly/l9</h3>
 
+<h3>Google JavaScript Style Guide http://gul.ly/d3q</h3>
 
-4. Spacing
-- Runtogethercodeishardtoread
-
-
-</section>
-
-<section class="slide">
-
-5. Comments
-- _why_ this code does what it does
-- What can we exect to happen if this code was removed.
-	(link to www.1729.com/blog/ExtremeNegativeCodeDocumentation.html )
-
-	</section>
-
-	<section class="slide">
-
-6. Equality
-</section>
-
-<section class="slide">
-
-7. Blocks
-- No braces is weird and confusing
-</section>
-
-<section class="slide">
-
-8 Function Calls
-</section>
-
-<section class="slide">
-
-9 Arrays and Objects
-</section>
-
-<section class="slide">
-
-10 Assignment
-</section>
-
-<section class="slide">
-
-11 Type Checks
-</section>
-
-<section class="slide">
-
-12 RegExp
-</section>
-
-<section class="slide">
-
-13 Strings
-</section>
-
-<section class="slide">
-
-14 jQuery Bugs, Features and Enhancements
-- Lifecycles of each
+<h3>Crockford's Code Conventions http://gul.ly/d3p</h3>
 
 </section>
 
