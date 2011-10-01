@@ -153,7 +153,7 @@
 </textarea>
 
 <h3>WTF? So, if obj is not falsy or not typeof object or has a nodeType property or is a window... return false? </h3>
-<h3>Now it wants to check for constructor and prototype.constructor and it might throw, hence the try/catch</h3>
+<h3>Now it wants to check for constructor and prototype.constructor and it might throw an exception?</h3>
 <h3>Um... empty for-in?</h3>
 <h3>If key is undefined? But key was never set to anything...?</h3>
 <h3>How about that awesome horizontal scroll bar?</h3>
@@ -306,7 +306,7 @@ isPlainObject: function( obj ) {
 
 
   <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
-  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.6.4/jquery.min.js"></script>
+  <script src="deck.js/jquery-1.6.4.min.js"></script>
   <script>window.jQuery || document.write('<script src="deck.js/jquery-1.6.4.min.js"><\/script>')</script>
 
 <!-- Deck Core and extensions -->
