@@ -94,50 +94,53 @@
 
 
 <section class="slide" id="style-intro">
-  <h2>jQuery with Style</h2>
-  <h3>h3</h3>
 
-  <div id="code" name="code" class="code" mode="javascript" style="display: none;">
-  // codez
-</div>
+<h1>Let's Write Stylish Code</h1>
 </section>
 
+<section class="slide" id="style-intro">
+<h1>Art School Rant?</h1>
+</section>
+
+
 <section class="slide">
-  <h2>How Your Code Might Look</h2>
+  <h2>Today, your code might look like this...</h2>
   <img src="img/hoarding-and-cluttering.jpg" height="500" />
 </section>
 
 <section class="slide">
-  <h2>How Your Code Should Look</h2>
+  <h2>When really, it should look like this...</h2>
   <img src="img/should-look.jpg" height="500" />
 </section>
 
 
 <section class="slide">
-	<h1>Why?</h1>
+  <h1>Why?</h1>
 </section>
 
 <section class="slide">
 
-	<h2>Encourages Contribution</h2>
-	<h3>Open Source, Distributed Development, Remote Teams, etc.</h3>
+  <h2>Encourages Contribution</h2>
+  <h3>Open Source, Distributed Development, Remote Teams, etc.</h3>
+  <img src="img/teamwork.jpg" height="500" />
+  <!-- <h1><a href="https://github.com/jquery/jquery/graphs/impact" target="_blank">Like This</a> -->
 </section>
 
 <section class="slide">
 
-	<h2>Less Spent Braincycles</h2>
-	<h3>Your brain is a parser - optimize code for your brain!</h3>
+  <h2>Waste Less Braincycles</h2>
+  <h3>Your brain is a parser - optimize code for your brain!</h3>
 
 </section>
 
 <section class="slide">
 
-	<h2>Future you says thanks</h2>
-	<img src="img/future-self.jpg" height="500" />
+  <h2>Future you will be glad you did</h2>
+  <img src="img/future-self.jpg" height="500" />
 </section>
 
 <section class="slide">
-	<h1>Code written by 10 people following a style guide should look like 1 person wrote it.</h1>
+  <h1>Code written by 10 people following a style guide should look like 1 person wrote it.</h1>
 
 </section>
 
@@ -146,15 +149,15 @@
 
 <section class="slide">
   <h2>Without a style guide, over time it might look like this...</h2>
-	<h3>Remember those boxes? They fell and spilled everywhere.</h3>
   <img src="img/oh-noes.jpg" height="500" />
+  <h3>Gross!</h3>
 </section>
 
 
 
 <section class="slide">
 
-<h1>Follow Along! http://gul.ly/l9</h1>
+<h1>So follow along! http://gul.ly/l9</h1>
 <!-- <h3>That's a lowercase L</h3> -->
 
 </section>
@@ -163,7 +166,7 @@
 
 <section class="slide">
 
-	<h2>Imagine that as code...</h2>
+  <h2>What if that mess was actually code...</h2>
 <textarea class="code" mode="javascript" style="display: none;">
 ...: function(obj){
 if(!obj||jQuery.type(obj)!='object' || obj.nodeType||jQuery.isWindow(obj)) return false;
@@ -184,18 +187,11 @@ try{ if(obj.constructor && !hasOwn.call(obj, 'constructor') && !hasOwn.call(obj.
 </section>
 
 
-<section class="slide">
-
-<h2>Linting and Hinting</h2>
-<h3>Enforce Best Practices</h3>
-<h3>Code quality</h3>
-
-</section>
 
 
 <section class="slide">
-<h2>Spacing</h2>
-<h3>Runtogethercodeishardtoread</h3>
+<h2>Be generous with whitespace</h2>
+<h3>becauseruntogethercodeishardtoread</h3>
 
 <textarea class="code" mode="javascript" style="display: none;">
 ...: function( obj ) {
@@ -210,13 +206,21 @@ try{ if(obj.constructor && !hasOwn.call(obj, 'constructor') && !hasOwn.call(obj.
 </textarea>
 </section>
 
+<section class="slide">
+<h1>Abstract Equality Operations, Literal Initialisers and Scoped Binding Forms</h1>
+</section>
+
+<section class="slide">
+<h1>Say that ten times fast.</h1>
+</section>
+
 
 <section class="slide">
 
-<h2>Comments</h2>
-<h3>_why_ this code does what it does</h3>
-<h3>What can we exect to happen if this code was removed.</h3>
-TODO: (link to www.1729.com/blog/ExtremeNegativeCodeDocumentation.html )
+<h2>We can improve this by commenting with great fervor!</h2>
+<h3>Tell WHY this code does what it does</h3>
+<h3>What can we expect to happen if this code was removed. ( http://gul.ly/d3v )</h3>
+
 
 <textarea class="code" mode="javascript" style="display: none;">
 ...: function( obj ) {
@@ -242,39 +246,37 @@ TODO: (link to www.1729.com/blog/ExtremeNegativeCodeDocumentation.html )
 </section>
 
 
-<section class="slide">
 
-<h2>Equality, Assignment</h2>
-<h3>Strict === whenever possible</h3>
-<h3>By value for null AND undefined, strict for undefined</h3>
-<textarea class="code" mode="javascript" style="display: none;">
-...: function( obj ) {
-  // Must be an Object.
-  // Make sure that DOM nodes and window objects don't pass through, as well
-  if ( !obj || jQuery.type(obj) !== 'object' || obj.nodeType || jQuery.isWindow(obj) )return false;
-  // Because of IE, we also have to check the presence of the constructor property.
-  try {
-    // Not own constructor property must be Object
-    if ( obj.constructor && !hasOwn.call(obj, 'constructor' ) && !hasOwn.call(obj.constructor.prototype, "isPrototypeOf") )return false;
-} catch(e) {
-  // IE8,9 Will throw exceptions on certain host objects #9897
-  return false;
-  }
-  // Own properties are enumerated firstly, so to speed up,
-  // if last one is own, then all properties are own.
-  var key;
-  for ( key in obj ) {}
-  return key === undefined || hasOwn.call(obj, key);
-}
-</textarea>
+
+<section class="slide">
+<h2>PSA</h2>
+<img src="img/porkchop-sandwiches.jpg" />
+</section>
+
+<section class="slide">
+<h1>Quotes... Single? Double?</h1>
+</section>
+
+<section class="slide">
+<h1>Tabs? Spaces?</h1>
 </section>
 
 
 <section class="slide">
+<h1>IT DOESN'T MATTER... Consistency Rules, Ok?!</h1>
+</section>
 
-<h2>Blocks</h2>
-<h3>Omitting braces is weird, confusing and criminal</h3>
-<h3>Braces detected by Lint, but let's make them readable</h3>
+<section class="slide">
+<h1>No, seriously... Don't mix them.</h1>
+</section>
+
+
+
+<section class="slide">
+
+<h2>Getting back to our code...</h2>
+<h3>When writing Blocks, omitting braces is weird, confusing and criminal</h3>
+<h3>There is also no need to put EVERYTHING in your condition on the same line</h3>
 <textarea class="code" mode="javascript" style="display: none;">
 ...: function( obj ) {
   // Must be an Object.
@@ -306,17 +308,6 @@ TODO: (link to www.1729.com/blog/ExtremeNegativeCodeDocumentation.html )
 </section>
 
 
-<section class="slide">
-<h1>Quotes: Pick One</h1>
-</section>
-
-<section class="slide">
-<h1>Single? Double?</h1>
-</section>
-
-<section class="slide">
-<h1>IT DOESN'T MATTER... Pick one and stick with it.</h1>
-</section>
 
 
 <section class="slide">
@@ -375,6 +366,10 @@ isPlainObject: function( obj ) {
 <h2>I am @rwaldron on the twitz</h2>
 
 <h3>Idiomatic.js http://gul.ly/d3r</h3>
+
+<h3>Extreme Negative Commenting http://gul.ly/d3v </h3>
+
+<h3>JSHint http://jshint.com</h3>
 
 <h3>jQuery Core Style Guide http://gul.ly/l9</h3>
 
